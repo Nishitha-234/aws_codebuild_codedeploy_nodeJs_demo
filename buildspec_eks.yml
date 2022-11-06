@@ -18,13 +18,6 @@ phases:
 
   pre_build:
     commands:
-      - echo Logging in to Amazon EKS...
-      - echo check config
-      - aws eks --region us-west-2 update-kubeconfig --name ekscluster
-      - kubectl config view --minify
-      - echo check kubectl access
-      - kubectl get svc
-      - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
       - docker pull $REPOSITORY_URI:$IMAGE_TAG
