@@ -19,7 +19,8 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon EKS...
-      - echo check config 
+      - echo check config
+      - aws eks --region us-west-2 update-kubeconfig --name ekscluster
       - kubectl config view --minify
       - echo check kubectl access
       - kubectl get svc
